@@ -8,6 +8,6 @@ public class  WebController {
 
     @GetMapping("/hello")
     public String hello() {
-        return "hello.html";
+        return "hello";
     }
 }

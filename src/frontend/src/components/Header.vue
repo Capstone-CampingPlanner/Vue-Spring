@@ -1,0 +1,40 @@
+<template>
+  <div>
+    <h1>판매자 전용메뉴입니다.</h1>
+    <b-navbar toggleable="lg" type="dark" variant="info">
+      <b-navbar-brand href="/">판매자 관리</b-navbar-brand>
+
+      <b-navbar-toggle target="nav_collapse"/>
+
+      <b-collapse is-nav id="nav_collapse">
+        <b-navbar-nav>
+          <b-nav-item href="#">공지사항</b-nav-item>
+          <b-nav-item to="/board/free">자유게시판</b-nav-item>
+          <b-nav-item href="#" v-on:click="getData">상품 등록</b-nav-item>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
+
+
+  </div>
+</template>
+
+<script>
+export default {
+  name: "Header",
+  data() {
+    return {};
+  },
+  methods: {
+    getData: function () {
+      const baseURI = 'http://localhost:8282';
+      this.$http.get(`${baseURI}/api/hello2`)
+        .then((result) => {
+          console.log(result)
+          this.msg = result.data
+        })
+    }
+
+  }
+};
+</script>
