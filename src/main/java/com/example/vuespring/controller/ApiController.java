@@ -1,25 +1,38 @@
 package com.example.vuespring.controller;
 
 import com.example.vuespring.data.Member;
+import com.example.vuespring.repository.MemberRepository;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 
 @RestController
+// @CrossOrigin("*")
 @RequestMapping("/api")
 public class ApiController {
 
+    @Autowired
+    private MemberRepository memberRepository;
+
     @GetMapping("/hello")
     public String hello() {
-        return "Api를 통해 Spring에서 Data 받아오기 성공";
+        return "추후 판매자 인증조회 DB 연동";
     }
 
     @PostMapping("/signup")
-    public String signup(@RequestBody Member member) {
+    @JsonProperty("member")
+    public Member addMember(@RequestBody Member member) {
+
+        if(member.getSavedTime()==null)
+            member.setSavedTime(LocalDateTime.now());
 
         System.out.println(member.getPassword());
-        return "hi";
+        memberRepository.save(member);
+        return member;
     }
 
 

@@ -1,5 +1,5 @@
-
-import {createWebHistory, createRouter } from 'vue-router'
+import Vue from 'vue'
+import Router from 'vue-router'
 
 import HelloWorld from '../components/HelloWorld'
 import Board from '../components/Board'
@@ -9,8 +9,10 @@ import CommentList from '../components/CommentList';
 import Signup from '../components/Signup';
 
 
+Vue.use(Router)
 
-const routes = [
+export default new Router({
+  routes: [
     {
       path: '/',
       name: 'HelloWorld',
@@ -42,8 +44,4 @@ const routes = [
       component: Signup
     }
   ]
-
-export const router = createRouter({
-    history: createWebHistory(),
-    routes
 })

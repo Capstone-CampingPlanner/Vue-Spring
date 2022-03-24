@@ -29,19 +29,11 @@ import axios from "axios";
             this.msg = result.data
           })
       },
-      signup: function () {
-        const baseURI = 'http://localhost:8282';
-        this.$http.post(`${baseURI}/api/signup`, null,{ params: { title:'POST방식 전달성공'}})
-          .then((res) => {
-            console.log("전달성공")
-          })
-          .catch((error) => {
-            console.log("전달실패")
-          })
 
-        // this.$router.push({
-        //   path: '/signup'
-        // })
+      signup: function () {
+        this.$router.push({
+          path: '/signup'
+        })
 
       }
     }
