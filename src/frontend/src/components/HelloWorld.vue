@@ -10,7 +10,8 @@
 </template>
 
 <script>
-import axios from 'axios'
+import Vue from "vue";
+import axios from "axios";
 
   export default {
     name: 'HelloWorld',
@@ -30,11 +31,11 @@ import axios from 'axios'
       },
       signup: function () {
         const baseURI = 'http://localhost:8282';
-        axios.get(`${baseURI}/api/signup`, null, { params: { title:'POST방식 전달성공'}})
-          .then(response => { // eslint-disable-line no-unused-vars
+        this.$http.post(`${baseURI}/api/signup`, null,{ params: { title:'POST방식 전달성공'}})
+          .then((res) => {
             console.log("전달성공")
           })
-          .catch(function (error) { // eslint-disable-line no-unused-vars
+          .catch((error) => {
             console.log("전달실패")
           })
 

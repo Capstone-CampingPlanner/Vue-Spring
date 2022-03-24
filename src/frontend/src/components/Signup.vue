@@ -43,7 +43,7 @@ export default {
           password: this.password
         }
         axios.post(url, data)
-          .then(function(response) { // eslint-disable-line no-unused-vars
+          .then(function(response) {
             console.log("성공");
           })
           .catch(function(error) {

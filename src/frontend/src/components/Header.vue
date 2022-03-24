@@ -8,7 +8,7 @@
 
       <b-collapse is-nav id="nav_collapse">
         <b-navbar-nav>
-          <b-nav-item href="/">공지사항</b-nav-item>
+          <b-nav-item href="#">공지사항</b-nav-item>
           <b-nav-item to="/board/free">자유게시판</b-nav-item>
           <b-nav-item href="#" v-on:click="getData">상품 등록</b-nav-item>
         </b-navbar-nav>

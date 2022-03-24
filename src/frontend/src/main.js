@@ -1,14 +1,23 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import { router } from './router'
+// The Vue build version to load with the `import` command
+// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+import Vue from 'vue'
+import App from './App'
+import router from './router'
+import BootstrapVue from "bootstrap-vue";
 import axios from "axios";
 
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+Vue.config.productionTip = false
+Vue.prototype.$http = axios;
+Vue.use(BootstrapVue)
 
 
-axios.defaults.headers.common['Access-Control_Allow-Origin'] = '*'
-axios.defaults.headers.get['Content-Type'] = 'application/json;charset=utf-8'
-
-const app = createApp(App)
-app.use(router)
-app.mount('#app')
-app.config.globalProperties.axios = axios
+/* eslint-disable no-new */
+new Vue({
+  el: '#app',
+  router,
+  components: { App },
+  template: '<App/>'
+})

@@ -41,7 +41,7 @@ export default {
     }
   },
   methods: {
-    rowClick(item) {
+    rowClick(item, index, e) {
       this.$router.push({
         path: `/board/free/detail/${item.content_id}`
       })
