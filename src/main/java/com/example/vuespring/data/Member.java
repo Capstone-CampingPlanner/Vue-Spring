@@ -1,13 +1,12 @@
 package com.example.vuespring.data;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -28,8 +27,14 @@ public class Member {
     @Column
     private LocalDateTime savedTime;
 
-    //
 
+    @JsonManagedReference
+    @OneToMany
+    @JoinColumn(name = "member")
+    private List<Menu> members;
+
+
+    //
     public Member(){}
     public Member(String userid, String password){
         this.userid = userid;
@@ -84,5 +89,13 @@ public class Member {
 
     public void setBusiness_number(String business_number) {
         this.business_number = business_number;
+    }
+
+    public List<Menu> getMembers() {
+        return members;
+    }
+
+    public void setMembers(List<Menu> members) {
+        this.members = members;
     }
 }
