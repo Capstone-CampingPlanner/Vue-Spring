@@ -34,6 +34,7 @@
       <b-form-input v-model="business_number" placeholder="사업자 번호를 입력하세요." :state="business_number" id="feedback-user"></b-form-input>
     </b-form>
 
+    <br>
     <b-button type="submit" @click="signSubmit" pill variant="primary">등록하기</b-button>
 
   </div>

@@ -23,11 +23,14 @@ import axios from "axios";
     methods: {
       getData: function () {
         const baseURI = 'http://localhost:8282';
-        this.$http.get(`${baseURI}/api/hello`)
-          .then((result) => {
-            console.log(result)
-            this.msg = result.data
+        this.$http.get(`${baseURI}/api/hello2`)
+          .then(response => {
+            console.log(response)
+            this.msg = response.data;
           })
+        .catch(error => {
+          console.log(error)
+        })
       },
 
       signup: function () {

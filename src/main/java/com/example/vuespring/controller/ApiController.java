@@ -3,24 +3,28 @@ package com.example.vuespring.controller;
 import com.example.vuespring.data.Member;
 import com.example.vuespring.repository.MemberRepository;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 // @CrossOrigin("*")
+@AllArgsConstructor  // @Autowired 대신사용
 @RequestMapping("/api")
 public class ApiController {
 
-    @Autowired
-    private MemberRepository memberRepository;
+    MemberRepository memberRepository;
 
     @GetMapping("/hello")
-    public String hello() {
-        return "추후 판매자 인증조회 DB 연동";
+    @JsonProperty("member")
+    public List memberList() {
+        List members = memberRepository.findAll();
+        return members;
     }
 
     @PostMapping("/signup")

@@ -7,6 +7,8 @@ import ContentDetail from '../components/ContentDetail';
 import Create from '../components/Create';
 import CommentList from '../components/CommentList';
 import Signup from '../components/Signup';
+import Product from "../components/Product";
+import Registration from "../components/Registration"
 
 
 Vue.use(Router)
@@ -42,6 +44,16 @@ export default new Router({
       path: '/signup',
       name: 'Signup',
       component: Signup
-    }
+    },
+    {
+      path: '/product',
+      name: 'Product',
+      component: Product
+    },
+    {
+      path: '/registration',
+      name: 'Registration',
+      component: Registration
+    },
   ]
 })

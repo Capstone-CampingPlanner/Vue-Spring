@@ -8,9 +8,9 @@
 
       <b-collapse is-nav id="nav_collapse">
         <b-navbar-nav>
-          <b-nav-item href="#">공지사항</b-nav-item>
+          <b-nav-item to="/product">회원 정보</b-nav-item>
           <b-nav-item to="/board/free">자유게시판</b-nav-item>
-          <b-nav-item href="#" v-on:click="getData">상품 등록</b-nav-item>
+          <b-nav-item to="/registration">상품 등록</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -26,14 +26,6 @@ export default {
     return {};
   },
   methods: {
-    getData: function () {
-      const baseURI = 'http://localhost:8282';
-      this.$http.get(`${baseURI}/api/hello2`)
-        .then((result) => {
-          console.log(result)
-          this.msg = result.data
-        })
-    }
 
   }
 };

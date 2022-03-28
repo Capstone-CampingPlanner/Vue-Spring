@@ -18,13 +18,13 @@ public class Member {
     private String userid;
     @Column(nullable=false, length=100)
     private String password;
-    @Column(nullable = false)
+    @Column()
     private String sales_type;
-    @Column(nullable = false)
+    @Column()
     private String payment;
     @Column()
     private String business_number;
-    @Column
+    @Column()
     private LocalDateTime savedTime;
 
 
