@@ -7,14 +7,19 @@ import com.example.vuespring.repository.MenuRepository;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 // @CrossOrigin("*")
@@ -45,9 +50,21 @@ public class ApiController {
     }
 
     @PostMapping("/product_signup")
-    public Menu addMenu(@RequestParam(value = "file_load", required = false) MultipartFile uploadFile, Menu menu) throws IOException {
+    public Menu addMenu(@RequestParam(value = "file_load", required = false) MultipartFile uploadFile, Menu menu, HttpServletRequest request) throws IllegalStateException, IOException {
         System.out.println("파일 이름" + uploadFile.getOriginalFilename());
         System.out.println("파일 크기" + uploadFile.getSize());
+
+        // 경로지정
+        String path = "C:\\Vue-Spring\\src\\main\\resources\\static\\images";
+
+        // 파일명 충돌방지(랜덤함수) 설정후 파일저장
+        UUID uuid = UUID.randomUUID();
+        String uuidFilename = uuid + "_" + uploadFile.getOriginalFilename();
+        File file = new File(path + uuidFilename);
+        uploadFile.transferTo(file);
+
+//        String path = request.getSession().getServletContext().getRealPath("/").concat("resources");
+//        System.out.println("path"+path);
 
         if(menu.getSavedTime()==null)
             menu.setSavedTime(LocalDateTime.now());
