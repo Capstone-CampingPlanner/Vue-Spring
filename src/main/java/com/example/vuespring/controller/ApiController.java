@@ -45,13 +45,14 @@ public class ApiController {
     }
 
     @PostMapping("/product_signup")
-    public Menu addMenu(@RequestParam(required = false) MultipartFile uploadFile, Menu menu) throws IOException {
+    public Menu addMenu(@RequestParam(value = "file_load", required = false) MultipartFile uploadFile, Menu menu) throws IOException {
         System.out.println("파일 이름" + uploadFile.getOriginalFilename());
         System.out.println("파일 크기" + uploadFile.getSize());
 
-
         if(menu.getSavedTime()==null)
             menu.setSavedTime(LocalDateTime.now());
+
+        menu.setFileload(uploadFile.getOriginalFilename());
         menuRepository.save(menu);
         return menu;
     }

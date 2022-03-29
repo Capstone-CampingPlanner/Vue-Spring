@@ -2,7 +2,7 @@
   <div>
     <br>
     <h1>상품 등록 페이지 입니다.</h1>
-    <b-form  v-on:submit.prevent="formSubmit" method="post">
+    <b-form  v-on:submit.prevent="formSubmit" method="post" enctype="multipart/form-data">
       <label for="text-select">상품분류</label>
       <b-form-select v-model="kind" :options="options"></b-form-select>
       <div class="mt-3">선택유형 : <strong>{{ kind }}</strong></div>
@@ -25,16 +25,16 @@
 
       <br>
       <b-form-file
-        v-model="fileload"
-        :state="Boolean(fileload)"
+        v-model="file_load"
+        :state="Boolean(file_load)"
         class="form-control"
         type="file"
-        id="photo" name="photo"
+        id="file_load"
         placeholder="상품을 설명할 이미지 파일을 업로드하세요."
         drop-placeholder="Drop file here...">
 
       </b-form-file>
-      <div class="mt-3">Selected file: {{ fileload ? fileload.name : '' }}</div>
+      <div class="mt-3">Selected file: {{ file_load ? file_load.name : '' }}</div>
     </b-form>
 
     <br>
@@ -57,7 +57,7 @@ export default {
       stock: '',
       price: '',
       ex: '',
-      fileload: '',
+      file_load: '',
       member: 'rigun',
 
 
@@ -78,19 +78,19 @@ export default {
     ProductSubmit: function () {
       const formData = new FormData();
 
-      const photoFile = document.getElementById("photo");
+      const photoFile = document.getElementById("file_load");
 
       formData.append('kind', this.kind);
       formData.append('menuname', this.menuname);
       formData.append('stock', this.stock);
       formData.append('price', this.price);
       formData.append('ex', this.ex);
-      formData.append('fileload', photoFile.files[0]);
+      formData.append('file_load', photoFile.files[0]);
       formData.append('member', this.member);
 
 
 
-      console.log(this.kind, this.menuname, this.stock, this.price, this.ex, this.fileload, this.member);
+      console.log(this.kind, this.menuname, this.stock, this.price, this.ex, this.file_load, this.member);
       const baseURI = 'http://localhost:8282';
 
       this.$http.post(`${baseURI}/api/product_signup`, formData, { headers: { 'Content-Type': 'multipart/form-data'}} )
