@@ -56,7 +56,7 @@ export default {
   methods: {
     fetchData() {
       const baseURI = 'http://localhost:8282';
-      this.$http.get(`${baseURI}/api/hello`)
+      this.$http.get(`${baseURI}/api/user_list`)
         .then(response => {
           console.log(response.data);
           this.list = response.data;

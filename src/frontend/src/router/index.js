@@ -7,7 +7,8 @@ import ContentDetail from '../components/ContentDetail';
 import Create from '../components/Create';
 import CommentList from '../components/CommentList';
 import Signup from '../components/Signup';
-import Product from "../components/UserList";
+import MyProduct from "../components/MyProduct";
+import ProductList from "../components/ProductList";
 import Registration from "../components/Registration"
 import UserList from "../components/UserList"
 
@@ -52,9 +53,14 @@ export default new Router({
       component: UserList
     },
     {
-      path: '/product',
-      name: 'Product',
-      component: Product
+      path: '/MyProduct',
+      name: 'MyProduct',
+      component: MyProduct
+    },
+    {
+      path: '/ProductList',
+      name: 'ProductList',
+      component: ProductList
     },
     {
       path: '/registration',

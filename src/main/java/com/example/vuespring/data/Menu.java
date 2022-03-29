@@ -32,12 +32,14 @@ public class Menu {
     private Member member;
 
     public Menu(){}
-    public Menu(int menuid, String menuname, int price, String ex, int stock) {
+    public Menu(int menuid, String menuname, int price, String ex, int stock, Kind kind, Member member, String fileload) {
         this.menuid = menuid;
         this.menuname = menuname;
         this.price = price;
         this.ex = ex;
         this.stock = stock;
+        this.kind = kind;
+        this.member = member;
     }
 
     public int getMenuid() {
@@ -111,4 +113,6 @@ public class Menu {
     public void setFileload(String fileload) {
         this.fileload = fileload;
     }
+
+
 }

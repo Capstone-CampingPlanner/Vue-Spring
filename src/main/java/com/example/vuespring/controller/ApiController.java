@@ -1,5 +1,6 @@
 package com.example.vuespring.controller;
 
+import com.example.vuespring.data.Kind;
 import com.example.vuespring.data.Member;
 import com.example.vuespring.data.Menu;
 import com.example.vuespring.repository.MemberRepository;
@@ -30,11 +31,27 @@ public class ApiController {
     MemberRepository memberRepository;
     MenuRepository menuRepository;
 
-    @GetMapping("/hello")
+    @GetMapping("/user_list")
     @JsonProperty("member")
     public List memberList() {
         List members = memberRepository.findAll();
         return members;
+    }
+
+    @GetMapping("/product_list")
+    @JsonProperty("menu")
+    public List<Menu> menuList(Kind kind) {
+        List<Menu> menus = menuRepository.findAll();
+
+        if (menus.isEmpty()) {
+            return null;
+        } else {
+            for (Menu m : menus) {
+                System.out.println(m.getKind().getKindname());
+                // return m.getKind().getKindname();
+            }
+        }
+        return menus;
     }
 
     @PostMapping("/signup")
@@ -74,6 +91,8 @@ public class ApiController {
         return menu;
     }
 
+    // (api/{code})
+    // pathvariable("code") code)
 
 
 }
