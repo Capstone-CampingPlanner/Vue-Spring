@@ -7,8 +7,9 @@ import ContentDetail from '../components/ContentDetail';
 import Create from '../components/Create';
 import CommentList from '../components/CommentList';
 import Signup from '../components/Signup';
-import Product from "../components/Product";
+import Product from "../components/UserList";
 import Registration from "../components/Registration"
+import UserList from "../components/UserList"
 
 
 Vue.use(Router)
@@ -44,6 +45,11 @@ export default new Router({
       path: '/signup',
       name: 'Signup',
       component: Signup
+    },
+    {
+      path: '/userList',
+      name: 'UserList',
+      component: UserList
     },
     {
       path: '/product',
