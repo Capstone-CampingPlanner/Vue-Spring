@@ -13,12 +13,13 @@ public class Menu {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int menuid;
 
-    @Column(nullable = false)
+    @Column()
     private String menuname;
     private int price;
     private String ex;
     private LocalDateTime savedTime;
     private int stock;
+    private String fileload;
 
     @JsonBackReference
     @ManyToOne(targetEntity = Kind.class)
@@ -101,5 +102,13 @@ public class Menu {
 
     public void setMember(Member member) {
         this.member = member;
+    }
+
+    public String getFileload() {
+        return fileload;
+    }
+
+    public void setFileload(String fileload) {
+        this.fileload = fileload;
     }
 }

@@ -1,14 +1,18 @@
 package com.example.vuespring.controller;
 
 import com.example.vuespring.data.Member;
+import com.example.vuespring.data.Menu;
 import com.example.vuespring.repository.MemberRepository;
+import com.example.vuespring.repository.MenuRepository;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -19,6 +23,7 @@ import java.util.List;
 public class ApiController {
 
     MemberRepository memberRepository;
+    MenuRepository menuRepository;
 
     @GetMapping("/hello")
     @JsonProperty("member")
@@ -37,6 +42,18 @@ public class ApiController {
         System.out.println(member.getPassword());
         memberRepository.save(member);
         return member;
+    }
+
+    @PostMapping("/product_signup")
+    public Menu addMenu(@RequestParam(required = false) MultipartFile uploadFile, Menu menu) throws IOException {
+        System.out.println("파일 이름" + uploadFile.getOriginalFilename());
+        System.out.println("파일 크기" + uploadFile.getSize());
+
+
+        if(menu.getSavedTime()==null)
+            menu.setSavedTime(LocalDateTime.now());
+        menuRepository.save(menu);
+        return menu;
     }
 
 
