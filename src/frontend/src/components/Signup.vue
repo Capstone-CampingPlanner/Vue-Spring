@@ -81,7 +81,7 @@ export default {
           payment: this.payment,
           business_number: this.business_number,
         }
-        axios.post(url, data)
+        axios.post(url, data, { headers: { 'Content-Type': 'application/json'}})
           .then(res => {
             console.log("성공");
           })

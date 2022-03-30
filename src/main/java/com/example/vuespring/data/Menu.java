@@ -1,13 +1,18 @@
 package com.example.vuespring.data;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-
-
+@Data
+@Getter
+@Setter
 @Table(name="menu")
 public class Menu {
 
@@ -24,12 +29,12 @@ public class Menu {
     private String fileload;
 
     @JsonBackReference
-    @ManyToOne(targetEntity = Kind.class)
+    @OneToOne(targetEntity = Kind.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "kind")
     private Kind kind;
 
     @JsonBackReference
-    @ManyToOne(targetEntity = Member.class)
+    @OneToOne(targetEntity = Member.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "member")
     private Member member;
 

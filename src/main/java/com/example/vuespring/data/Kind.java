@@ -1,5 +1,6 @@
 package com.example.vuespring.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -14,10 +15,11 @@ public class Kind {
     @Column()
     private String kindname;
 
-    @JsonManagedReference
-    @OneToMany
-    @JoinColumn(name = "kind")
-    private List<Menu> menus;
+//    @JsonManagedReference
+//    @OneToMany(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "kind")
+//    @JsonIgnore
+//    private List<Menu> menus;
 
 
     public Kind() {}
@@ -43,11 +45,11 @@ public class Kind {
         this.kindname = kindname;
     }
 
-    public List<Menu> getMenus() {
-        return menus;
-    }
-
-    public void setMenus(List<Menu> menus) {
-        this.menus = menus;
-    }
+//    public List<Menu> getMenus() {
+//        return menus;
+//    }
+//
+//    public void setMenus(List<Menu> menus) {
+//        this.menus = menus;
+//    }
 }

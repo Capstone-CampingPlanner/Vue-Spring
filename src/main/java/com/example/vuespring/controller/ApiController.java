@@ -20,6 +20,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -41,17 +42,25 @@ public class ApiController {
     @GetMapping("/product_list")
     @JsonProperty("menu")
     public List<Menu> menuList(Kind kind) {
-        List<Menu> menus = menuRepository.findAll();
-
-        if (menus.isEmpty()) {
-            return null;
-        } else {
-            for (Menu m : menus) {
-                System.out.println(m.getKind().getKindname());
-                // return m.getKind().getKindname();
-            }
+//        List<Menu> menus = menuRepository.findAll();
+        Optional<Menu> optionalMenu = menuRepository.findByKind(kind);
+        if(optionalMenu.isPresent()) {
+            Menu menu = optionalMenu.get();
+            System.out.println(menu);
         }
-        return menus;
+        List<Menu> menuList = menuRepository.findAll();
+
+
+//        if (menus.isEmpty()) {
+//            return null;
+//        } else {
+//            for (Menu m : menus) {
+//                System.out.println(m.getKind().getKindname());
+//                // return m.getKind().getKindname();
+//            }
+//        }
+//        return menus;
+            return menuList;
     }
 
     @PostMapping("/signup")

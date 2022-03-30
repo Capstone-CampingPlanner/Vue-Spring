@@ -1,5 +1,7 @@
 package com.example.vuespring.data;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,10 +30,11 @@ public class Member {
     private LocalDateTime savedTime;
 
 
-    @JsonManagedReference
-    @OneToMany
-    @JoinColumn(name = "member")
-    private List<Menu> members;
+//    @JsonBackReference
+//    @OneToMany(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "member")
+//    @JsonIgnore
+//    private List<Menu> members;
 
 
     //
@@ -91,11 +94,5 @@ public class Member {
         this.business_number = business_number;
     }
 
-    public List<Menu> getMembers() {
-        return members;
-    }
 
-    public void setMembers(List<Menu> members) {
-        this.members = members;
-    }
 }
