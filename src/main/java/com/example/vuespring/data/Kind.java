@@ -1,5 +1,6 @@
 package com.example.vuespring.data;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -12,6 +13,7 @@ public class Kind {
 
     @Id
     private int kindid;
+
     @Column()
     private String kindname;
 

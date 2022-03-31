@@ -24,13 +24,15 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-// @CrossOrigin("*")
-@AllArgsConstructor  // @Autowired 대신사용
+@CrossOrigin("*")
+//@AllArgsConstructor  // @Autowired 대신사용
 @RequestMapping("/api")
 public class ApiController {
 
-    MemberRepository memberRepository;
-    MenuRepository menuRepository;
+    @Autowired
+    private MemberRepository memberRepository;
+    @Autowired
+    private MenuRepository menuRepository;
 
     @GetMapping("/user_list")
     @JsonProperty("member")
@@ -40,16 +42,10 @@ public class ApiController {
     }
 
     @GetMapping("/product_list")
-    @JsonProperty("menu")
-    public List<Menu> menuList(Kind kind) {
-//        List<Menu> menus = menuRepository.findAll();
-        Optional<Menu> optionalMenu = menuRepository.findByKind(kind);
-        if(optionalMenu.isPresent()) {
-            Menu menu = optionalMenu.get();
-            System.out.println(menu);
-        }
-        List<Menu> menuList = menuRepository.findAll();
-
+//    @JsonProperty("menu")
+    public List<Menu> menuList() {
+        List<Menu> menus = menuRepository.findAll();
+//        List<Menu> menuList = menuRepository.findAllByMemberList();
 
 //        if (menus.isEmpty()) {
 //            return null;
@@ -60,7 +56,17 @@ public class ApiController {
 //            }
 //        }
 //        return menus;
-            return menuList;
+            return menus;
+    }
+
+    @GetMapping("/myProduct_list")
+//    @JsonProperty("menu")
+    public List<Menu> menuMyList() {
+
+//        System.out.println(menuList.get(0).getKindid().getKindname());
+//        List<Menu> myList = menuRepository.findAllByMenuList("dongmin");
+        List<Menu> myMenus = menuRepository.findAll();
+        return myMenus;
     }
 
     @PostMapping("/signup")

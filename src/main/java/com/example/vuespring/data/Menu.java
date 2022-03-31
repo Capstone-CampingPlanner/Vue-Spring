@@ -10,9 +10,6 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Data
-@Getter
-@Setter
 @Table(name="menu")
 public class Menu {
 
@@ -28,42 +25,26 @@ public class Menu {
     private int stock;
     private String fileload;
 
-    @JsonBackReference
-    @OneToOne(targetEntity = Kind.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "kind")
-    private Kind kind;
+    // fetch = FetchType.LAZY 쓰면 외래키 조회 불가 !
 
-    @JsonBackReference
-    @OneToOne(targetEntity = Member.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "member")
-    private Member member;
+
+//    @JsonBackReference
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "kindid")
+    private Kind kindid;
+
+//    @JsonBackReference
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userid")
+//    @JsonIgnore
+    private Member userid;
 
     public Menu(){}
-    public Menu(int menuid, String menuname, int price, String ex, int stock, Kind kind, Member member, String fileload) {
-        this.menuid = menuid;
-        this.menuname = menuname;
-        this.price = price;
-        this.ex = ex;
-        this.stock = stock;
-        this.kind = kind;
-        this.member = member;
+    public Menu(Kind kindid, Member userid) {
+        this.kindid = kindid;
+        this.userid = userid;
     }
 
-    public int getMenuid() {
-        return menuid;
-    }
-
-    public void setMenuid(int menuid) {
-        this.menuid = menuid;
-    }
-
-    public String getMenuname() {
-        return menuname;
-    }
-
-    public void setMenuname(String menuname) {
-        this.menuname = menuname;
-    }
 
     public int getPrice() {
         return price;
@@ -97,22 +78,6 @@ public class Menu {
         this.stock = stock;
     }
 
-    public Kind getKind() {
-        return kind;
-    }
-
-    public void setKind(Kind kind) {
-        this.kind = kind;
-    }
-
-    public Member getMember() {
-        return member;
-    }
-
-    public void setMember(Member member) {
-        this.member = member;
-    }
-
     public String getFileload() {
         return fileload;
     }
@@ -121,5 +86,35 @@ public class Menu {
         this.fileload = fileload;
     }
 
+    public int getMenuid() {
+        return menuid;
+    }
 
+    public void setMenuid(int menuid) {
+        this.menuid = menuid;
+    }
+
+    public String getMenuname() {
+        return menuname;
+    }
+
+    public void setMenuname(String menuname) {
+        this.menuname = menuname;
+    }
+
+    public Kind getKindid() {
+        return kindid;
+    }
+
+    public void setKindid(Kind kindid) {
+        this.kindid = kindid;
+    }
+
+    public Member getUserid() {
+        return userid;
+    }
+
+    public void setUserid(Member userid) {
+        this.userid = userid;
+    }
 }

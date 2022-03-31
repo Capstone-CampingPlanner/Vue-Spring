@@ -6,8 +6,8 @@
     <table class="table table-striped">
       <thead>
       <tr>
-        <th>분류</th>
         <th>메뉴명</th>
+        <th>분류</th>
         <th>가격</th>
         <th>등록일자</th>
       </tr>
@@ -15,9 +15,9 @@
       <tbody>
       <tr v-for="product in list"
           :key="product.id"
-          :item="product" @click="showInfo(product.id)" style="cursor:pointer;">
-        <td>{{ product.kind }}</td>
-        <td>{{ product.menuname }}</td>
+          :item="product" @click="toDetail(product.menuname)">
+        <th scope="row">{{ product.menuname }}</th>
+        <td>{{ product.kindid.kindname }}</td>
         <td>{{ product.price }}</td>
         <td>{{ product.savedTime }}</td>
       </tr>
@@ -38,13 +38,12 @@ export default {
     return {
       selected: false,
       list: [],
-      item: null,
+      product: '',
     }
   },
   methods: {
     goData() {
-      const baseURI = 'http://localhost:8282';
-      this.$http.get(`${baseURI}/api/product_list`)
+      axios.get('http://localhost:8282/api/product_list')
         .then((res) => {
           console.log(res.data);
           this.list = res.data;
@@ -53,8 +52,11 @@ export default {
           console.log(e)
         })
     },
-    showInfo(id) {
-      this.product = this.list[id]
+    toDetail(productId){
+      this.$router.push({
+        name: "productDetail",
+        query: { id : productId }
+      })
     }
 
   }

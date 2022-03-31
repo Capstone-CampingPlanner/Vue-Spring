@@ -14,8 +14,9 @@
       <tbody>
       <tr v-for="item in list"
           :key="item.id"
-          :item="item" @click="showInfo(item.id)" style="cursor:pointer;">
-        <td>{{ item.userid }}</td>
+          :item="item" @click='toDetail(item.userid)' style="cursor:pointer;">
+        <th scope="row">{{ item.userid }}</th>
+
         <td>{{ item.password }}</td>
         <td>{{ item.savedTime }}</td>
         <td>{{ item.payment }}</td>
@@ -50,7 +51,7 @@ export default {
     return {
       selected: false,
       list: [],
-      item: null,
+      item: '',
     }
   },
   methods: {
@@ -64,25 +65,14 @@ export default {
         .catch(error => {
           console.log(error)
         })
-      },
-    showInfo(id) {
-      this.item = this.list[id]
-      this.selected = true
     },
-    closeInfo() {
-      this.item = null
-      this.selected = false
-    },
-    deleteArticle(id) {
-      let articleId = id;
-      this.$axios.delete('/api/boards/delete/' + articleId)
-        .then(() => {
-          window.location.reload();
-        })
-    },
-    moveUpdatePage(id) {
-      this.$router.push({ path: '/board/update/', query: { id : id}})
+    toDetail(contentId) {
+      this.$router.push({
+        name: ""
+      })
     }
+
+
   }
 }
 </script>

@@ -84,9 +84,14 @@ export default {
         axios.post(url, data, { headers: { 'Content-Type': 'application/json'}})
           .then(res => {
             console.log("성공");
+            alert("회원가입이 정상적으로 등록되었습니다.");
+            this.$router.push({
+              name: "UserList"
+            });
           })
           .catch(function(error) {
             console.log(error);
+            alert("회원가입이 실패하였습니다.");
           })
       }
 

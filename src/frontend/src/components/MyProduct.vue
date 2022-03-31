@@ -11,12 +11,12 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="item in list"
-          :key="item.id"
-          :item="item" @click="showInfo(item.id)" style="cursor:pointer;">
-        <td>{{ item.userid }}</td>
-        <td>{{ item.password }}</td>
-        <td>{{ item.savedTime }}</td>
+      <tr v-for="myProduct in list"
+          :key="myProduct.id"
+          :item="myProduct" @click="showInfo(myProduct.id)" style="cursor:pointer;">
+        <td>{{ myProduct.kindid.kindname }}</td>
+        <td>{{ myProduct.menuname }}</td>
+        <td>{{ myProduct.savedTime }}</td>
       </tr>
       </tbody>
     </table>
@@ -27,7 +27,33 @@
 import axios from 'axios'
 
 export default {
-  name: "MyProduct"
+  name: "MyProduct",
+  created() {
+    this.goMyData()
+  },
+  data() {
+    return {
+      selected: false,
+      list: [],
+      myProduct: '',
+    }
+  },
+  methods: {
+    goMyData() {
+      axios.get('http://localhost:8282/api/myProduct_list')
+        .then((res) => {
+          console.log(res.data);
+          this.list = res.data;
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    },
+    showInfo(id) {
+      this.myProduct = this.list[id]
+    }
+
+  }
 }
 </script>
 

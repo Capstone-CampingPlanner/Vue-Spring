@@ -4,8 +4,8 @@
     <h1>상품 등록 페이지 입니다.</h1>
     <b-form  v-on:submit.prevent="formSubmit" method="post" enctype="multipart/form-data">
       <label for="text-select">상품분류</label>
-      <b-form-select v-model="kind" :options="options"></b-form-select>
-      <div class="mt-3">선택유형 : <strong>{{ kind }}</strong></div>
+      <b-form-select v-model="kindid" :options="options"></b-form-select>
+      <div class="mt-3">선택유형 : <strong>{{ kindid }}</strong></div>
 
       <br>
       <label for="text-select2">메뉴명</label>
@@ -52,13 +52,13 @@ export default {
 
   data() {
     return {
-      kind: '',
+      kindid: '',
       menuname: '',
       stock: '',
       price: '',
       ex: '',
       file_load: '',
-      member: 'rigun',
+      userid: 'dongmin',
 
 
 
@@ -80,26 +80,33 @@ export default {
 
       const photoFile = document.getElementById("file_load");
 
-      formData.append('kind', this.kind);
+      formData.append('kindid', this.kindid);
       formData.append('menuname', this.menuname);
       formData.append('stock', this.stock);
       formData.append('price', this.price);
       formData.append('ex', this.ex);
       formData.append('file_load', photoFile.files[0]);
-      formData.append('member', this.member);
+      formData.append('userid', this.userid);
 
 
 
-      console.log(this.kind, this.menuname, this.stock, this.price, this.ex, this.file_load, this.member);
+      console.log(this.kindid, this.menuname, this.stock, this.price, this.ex, this.file_load, this.userid);
       const baseURI = 'http://localhost:8282';
 
       this.$http.post(`${baseURI}/api/product_signup`, formData, { headers: { 'Content-Type': 'multipart/form-data'}} )
         .then(res => {
           console.log("성공" + formData);
+          alert("상품이 등록되었습니다.");
+          this.$router.push({
+            name: "MyProduct"
+          });
         })
         .catch(function (error) {
           console.log("에러" + error);
+          alert("상품이 등록되지않았습니다.");
         })
+
+
     }
   },
   computed: {

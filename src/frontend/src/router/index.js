@@ -11,6 +11,7 @@ import MyProduct from "../components/MyProduct";
 import ProductList from "../components/ProductList";
 import Registration from "../components/Registration"
 import UserList from "../components/UserList"
+import ProductDetail from "../components/ProductDetail";
 
 
 Vue.use(Router)
@@ -66,6 +67,11 @@ export default new Router({
       path: '/registration',
       name: 'Registration',
       component: Registration
+    },
+    {
+      path: '/ProductDetail',
+      name: 'productDetail',
+      component: ProductDetail
     },
   ]
 })
