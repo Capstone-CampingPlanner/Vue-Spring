@@ -55,7 +55,7 @@ export default {
     toDetail(productId){
       this.$router.push({
         name: "productDetail",
-        query: { id : productId }
+        query: { menuname : productId }
       })
     }
 

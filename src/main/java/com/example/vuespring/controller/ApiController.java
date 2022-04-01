@@ -3,10 +3,15 @@ package com.example.vuespring.controller;
 import com.example.vuespring.data.Kind;
 import com.example.vuespring.data.Member;
 import com.example.vuespring.data.Menu;
+import com.example.vuespring.dto.APIResponse;
+import com.example.vuespring.dto.ProductDetailDTO;
 import com.example.vuespring.repository.MemberRepository;
 import com.example.vuespring.repository.MenuRepository;
+import com.example.vuespring.service.MenuService;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
@@ -25,14 +30,16 @@ import java.util.UUID;
 
 @RestController
 @CrossOrigin("*")
-//@AllArgsConstructor  // @Autowired 대신사용
+@RequiredArgsConstructor
+@Slf4j
+@AllArgsConstructor  // @Autowired 대신사용
 @RequestMapping("/api")
 public class ApiController {
 
-    @Autowired
-    private MemberRepository memberRepository;
-    @Autowired
-    private MenuRepository menuRepository;
+    MenuService menuService;
+
+    MemberRepository memberRepository;
+    MenuRepository menuRepository;
 
     @GetMapping("/user_list")
     @JsonProperty("member")
@@ -110,4 +117,21 @@ public class ApiController {
     // pathvariable("code") code)
 
 
+//    @GetMapping("/product_detail/{id}")
+//    @JsonProperty("menu")
+//    public List<Menu> productDetail(@PathVariable("id") Menu userid) {
+//        List<Menu> productListDetail = menuRepository.findByUserid(userid);
+//
+//        return productListDetail;
+//    }
+
+
+    @GetMapping("/product_detail/{menuname}")
+    public APIResponse product_Detail(@PathVariable("menuname") String menuname) {
+       System.out.println("성공" + menuname);
+       return APIResponse.of(menuService.getProductDetail(menuname));
+
+
+    }
 }
+
