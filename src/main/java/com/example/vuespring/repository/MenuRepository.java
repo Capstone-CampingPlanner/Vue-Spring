@@ -30,4 +30,5 @@ public interface MenuRepository extends JpaRepository<Menu, Integer> {
 
     Optional<Menu> findByMenuAndDeleteYN(String menuname, String deleteYN);
 
+    Optional<Menu> findByMenuname(String menuname);
 }

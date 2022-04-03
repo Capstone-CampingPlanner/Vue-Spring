@@ -2,6 +2,7 @@ package com.example.vuespring.data;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -40,11 +41,38 @@ public class Menu {
     private Member userid;
 
     public Menu(){}
-    public Menu(Kind kindid, Member userid) {
+
+    @Builder
+    public Menu(int menuid, String menuname, int price, String ex, LocalDateTime savedTime, int stock, String fileload, Kind kindid, Member userid) {
+        this.menuid = menuid;
+        this.menuname = menuname;
+        this.price = price;
+        this.ex = ex;
+        this.savedTime = savedTime;
+        this.stock = stock;
+        this.fileload = fileload;
         this.kindid = kindid;
         this.userid = userid;
+
     }
 
+
+
+    public int getMenuid() {
+        return menuid;
+    }
+
+    public void setMenuid(int menuid) {
+        this.menuid = menuid;
+    }
+
+    public String getMenuname() {
+        return menuname;
+    }
+
+    public void setMenuname(String menuname) {
+        this.menuname = menuname;
+    }
 
     public int getPrice() {
         return price;
@@ -84,22 +112,6 @@ public class Menu {
 
     public void setFileload(String fileload) {
         this.fileload = fileload;
-    }
-
-    public int getMenuid() {
-        return menuid;
-    }
-
-    public void setMenuid(int menuid) {
-        this.menuid = menuid;
-    }
-
-    public String getMenuname() {
-        return menuname;
-    }
-
-    public void setMenuname(String menuname) {
-        this.menuname = menuname;
     }
 
     public Kind getKindid() {

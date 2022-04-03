@@ -14,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -127,11 +129,12 @@ public class ApiController {
 
 
     @GetMapping("/product_detail/{menuname}")
-    public APIResponse product_Detail(@PathVariable("menuname") String menuname) {
-       System.out.println("성공" + menuname);
-       return APIResponse.of(menuService.getProductDetail(menuname));
+    public ResponseEntity<?> product_Detail(@PathVariable("menuname") String menuname) throws Exception {
+        System.out.println("성공" + menuname);
+        ResponseEntity<?> entity = null;
 
-
+        entity = new ResponseEntity<ProductDetailDTO>(menuService.view(menuname), HttpStatus.OK);
+        return entity;
     }
 }
 
