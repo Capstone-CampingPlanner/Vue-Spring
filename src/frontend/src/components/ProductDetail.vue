@@ -1,12 +1,15 @@
 <template>
   <div>
-    <h1>ㅎㅇ</h1>
+    <h1>상세페이지</h1>
   </div>
 </template>
 
 <script>
 export default {
   name: "ProductDetail",
+  created() {
+    this.id = this.$route.query.menuid;
+  },
   data() {
     return {
       content: ''
@@ -14,12 +17,13 @@ export default {
 
   },
   methods: {
-    created() {
+    mounted() {
       this.fetchData();
     },
     fetchData() {
       const baseURI = 'http://localhost:8282';
-      this.axios.get(`${baseURI}/api/product_detail` + this.$route.query.menuname)
+      console.log(this.id)
+      this.axios.get(`${baseURI}/api/product_detail` + this.$route.query.menuid)
       .then(res => {
         console.log(res.data);
         this.content = res.data;

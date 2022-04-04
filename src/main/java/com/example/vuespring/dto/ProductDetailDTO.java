@@ -26,19 +26,19 @@ public class ProductDetailDTO {
     private Kind kindid;
     private Member userid;
 
-    public Menu toEntity() {
-        return Menu.builder()
-                .menuid(menuid)
-                .menuname(menuname)
-                .price(price)
-                .ex(ex)
-                .savedTime(savedTime)
-                .stock(stock)
-                .fileload(fileload)
-                .kindid(kindid)
-                .userid(userid)
-                .build();
-    }
+//    public Menu toEntity() {
+//        return Menu.builder()
+//                .menuid(menuid)
+//                .menuname(menuname)
+//                .price(price)
+//                .ex(ex)
+//                .savedTime(savedTime)
+//                .stock(stock)
+//                .fileload(fileload)
+//                .kindid(kindid)
+//                .userid(userid)
+//                .build();
+//    }
 
     public ProductDetailDTO(Menu menu) {
         this.menuname = menuname;

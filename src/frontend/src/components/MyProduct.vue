@@ -5,6 +5,7 @@
     <table class="table table-striped">
       <thead>
       <tr>
+        <th>#</th>
         <th>분류</th>
         <th>메뉴명</th>
         <th>등록일자</th>
@@ -14,6 +15,7 @@
       <tr v-for="myProduct in list"
           :key="myProduct.id"
           :item="myProduct" @click="showInfo(myProduct.id)" style="cursor:pointer;">
+        <th scope="row">{{ product.menuid }}</th>
         <td>{{ myProduct.kindid.kindname }}</td>
         <td>{{ myProduct.menuname }}</td>
         <td>{{ myProduct.savedTime }}</td>

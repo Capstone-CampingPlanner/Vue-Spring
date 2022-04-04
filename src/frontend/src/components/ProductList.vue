@@ -6,6 +6,7 @@
     <table class="table table-striped">
       <thead>
       <tr>
+        <th>#</th>
         <th>메뉴명</th>
         <th>분류</th>
         <th>가격</th>
@@ -15,12 +16,14 @@
       <tbody>
       <tr v-for="product in list"
           :key="product.id"
-          :item="product" @click="toDetail(product.menuname)">
-        <th scope="row">{{ product.menuname }}</th>
+          :item="product" @click="toDetail(product)">
+        <th scope="row">{{ product.menuid }}</th>
+        <td>{{ product.menuname }}</td>
         <td>{{ product.kindid.kindname }}</td>
         <td>{{ product.price }}</td>
         <td>{{ product.savedTime }}</td>
       </tr>
+      <router-link :to="{name: 'productDetail', params: { menuid:product.menuid }}"></router-link>
       </tbody>
     </table>
   </div>
@@ -52,10 +55,9 @@ export default {
           console.log(e)
         })
     },
-    toDetail(productId){
+    toDetail(product){
       this.$router.push({
-        name: "productDetail",
-        query: { menuname : productId }
+        path: `/ProductDetail/${product.menuid}`
       })
     }
 

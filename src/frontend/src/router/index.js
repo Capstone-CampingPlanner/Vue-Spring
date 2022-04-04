@@ -69,9 +69,10 @@ export default new Router({
       component: Registration
     },
     {
-      path: '/ProductDetail',
+      path: '/ProductDetail/:menuid',
       name: 'productDetail',
-      component: ProductDetail
+      component: ProductDetail,
+      // props: true
     },
   ]
 })

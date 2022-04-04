@@ -5,6 +5,7 @@ import com.example.vuespring.data.Member;
 import com.example.vuespring.data.Menu;
 import com.example.vuespring.dto.APIResponse;
 import com.example.vuespring.dto.ProductDetailDTO;
+import com.example.vuespring.repository.KindRepository;
 import com.example.vuespring.repository.MemberRepository;
 import com.example.vuespring.repository.MenuRepository;
 import com.example.vuespring.service.MenuService;
@@ -31,20 +32,24 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin("*")
-@RequiredArgsConstructor
-@Slf4j
-@AllArgsConstructor  // @Autowired 대신사용
+//@CrossOrigin("*")
+//@RequiredArgsConstructor
+//@Slf4j
+//@AllArgsConstructor  // @Autowired 대신사용
 @RequestMapping("/api")
 public class ApiController {
 
-    MenuService menuService;
-
+    @Autowired
     MemberRepository memberRepository;
+
+    @Autowired
     MenuRepository menuRepository;
 
+    @Autowired
+    KindRepository kindRepository;
+
     @GetMapping("/user_list")
-    @JsonProperty("member")
+//    @JsonProperty("member")
     public List memberList() {
         List members = memberRepository.findAll();
         return members;
@@ -79,7 +84,7 @@ public class ApiController {
     }
 
     @PostMapping("/signup")
-    @JsonProperty("member")
+//    @JsonProperty("member")
     public Member addMember(@RequestBody Member member) {
 
         if(member.getSavedTime()==null)
@@ -128,13 +133,13 @@ public class ApiController {
 //    }
 
 
-    @GetMapping("/product_detail/{menuname}")
-    public ResponseEntity<?> product_Detail(@PathVariable("menuname") String menuname) throws Exception {
-        System.out.println("성공" + menuname);
-        ResponseEntity<?> entity = null;
+    @GetMapping("/product_detail/{menuid}")
+    public Optional<Menu> getProduct_Detail(@PathVariable("menunid") int menuid) throws Exception {
+        System.out.println("성공" + menuid);
 
-        entity = new ResponseEntity<ProductDetailDTO>(menuService.view(menuname), HttpStatus.OK);
-        return entity;
+        Optional<Menu> menuidList = menuRepository.findById(menuid);
+        return menuidList;
+
     }
 }
 

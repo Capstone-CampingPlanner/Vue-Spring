@@ -24,26 +24,26 @@ import static com.example.vuespring.constant.Constants.DELETE_N;
 public class MenuService {
 
     private MenuRepository menuRepository;
-    private ModelMapper modelMapper;
+//    private ModelMapper modelMapper;
 
-    public List<Menu> list() {
-        List<Menu> list = menuRepository.findAll();
-
-        return list;
-    }
-
-    public ProductDetailDTO view(String menuname) throws Exception {
-        Optional<Menu> menu = menuRepository.findByMenuname(menuname);
-
-        if(menu.isPresent()) {
-            return new ProductDetailDTO(menu.get());
-        } else {
-            throw new NotFoundException("리소스를 찾을 수 없습니다.");
-        }
-    }
-
-
-
+//    public List<Menu> list() {
+//        List<Menu> list = menuRepository.findAll();
+//
+//        return list;
+//    }
+//
+//    public ProductDetailDTO view(String menuname) throws Exception {
+//        Optional<Menu> menu = menuRepository.findByMenuname(menuname);
+//
+//        if(menu.isPresent()) {
+//            return new ProductDetailDTO(menu.get());
+//        } else {
+//            throw new NotFoundException("리소스를 찾을 수 없습니다.");
+//        }
+//    }
+//
+//
+//
 //    @Transactional
 //    public ProductDetailDTO getProductDetail(String menuname) {
 //        return modelMapper.map(getDeveloperByMenuname(menuname), ProductDetailDTO.class);
@@ -52,6 +52,6 @@ public class MenuService {
 //    private Menu getDeveloperByMenuname(String menuname) {
 //        return menuRepository.findByMenuAndDeleteYN(menuname, DELETE_N).orElseThrow(() -> new GeneralException(ErrorCode.BAD_REQUEST));
 //    }
-
+//
 
 }

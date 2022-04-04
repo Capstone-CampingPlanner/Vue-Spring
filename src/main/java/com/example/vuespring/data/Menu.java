@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class Menu {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int menuid;
 
     @Column()
@@ -42,7 +42,6 @@ public class Menu {
 
     public Menu(){}
 
-    @Builder
     public Menu(int menuid, String menuname, int price, String ex, LocalDateTime savedTime, int stock, String fileload, Kind kindid, Member userid) {
         this.menuid = menuid;
         this.menuname = menuname;
