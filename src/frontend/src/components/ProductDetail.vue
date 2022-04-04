@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 
 export default {
   name: "ProductDetail",
@@ -47,6 +47,13 @@ export default {
         console.log(e);
       })
     },
+
+    buyData() {
+
+    },
+    putData() {
+
+    }
 
 
   }

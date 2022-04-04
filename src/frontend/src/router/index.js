@@ -8,7 +8,6 @@ import Create from '../components/Create';
 import CommentList from '../components/CommentList';
 import Signup from '../components/Signup';
 import MyProductList from "../components/MyProductList";
-import MyProductDetail from "../components/MyProductDetail"
 import ProductList from "../components/ProductList";
 import Registration from "../components/Registration"
 import UserList from "../components/UserList"
@@ -60,20 +59,15 @@ export default new Router({
       component: MyProductList
     },
     {
-      path: '/MyProductDetail/:menuid',
-      name: 'MyProductDetail',
-      component: MyProductDetail,
-      props: true
-    },
-    {
       path: '/ProductList',
       name: 'ProductList',
       component: ProductList
     },
     {
-      path: '/registration',
+      path: '/registration/:menuid?',
       name: 'Registration',
-      component: Registration
+      component: Registration,
+      props: true
     },
     {
       path: '/ProductDetail/:menuid',

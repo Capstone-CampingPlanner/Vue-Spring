@@ -8,7 +8,7 @@
       <div class="mt-3">선택유형 : <strong>{{ kindid }}</strong></div>
 
       <br>
-      <label for="text-select2">메뉴명</label>
+      <label>메뉴명</label>
       <b-form-input v-model="menuname" placeholder="메뉴명을 입력하세요." :state="menuname" id="feedback-user"></b-form-input>
 
       <br>
@@ -37,6 +37,10 @@
       <div class="mt-3">Selected file: {{ file_load ? file_load.name : '' }}</div>
     </b-form>
 
+    <b-input v-model="this.myContent.menuname" placeholder="제목을 입력해 주세요."></b-input>
+    <p>{{ this.subject }}</p>
+    <p>{{ subject }}</p>
+    <p>{{ this.myContent.menuname }}</p>
     <br>
     <b-button type="submit" @click="ProductSubmit" pill variant="primary">등록하기</b-button>
 
@@ -46,10 +50,9 @@
 <script>
 import axios from 'axios'
 
-let changeFile;
+// let changeFile;
 export default {
   name: "Registration",
-
   data() {
     return {
       kindid: '',
@@ -59,7 +62,10 @@ export default {
       ex: '',
       file_load: '',
       userid: 'dongmin',
+      subject: '',
 
+      id: '',
+      myContent: [],
 
 
       options: [
@@ -74,6 +80,17 @@ export default {
 
     }
   },
+  created() {
+    this.myDataList()
+
+    // if(this.$route.params.menuid > 0) {
+    //   this.kindid = this.myContent.kindid.kindid;
+    //   this.menuname = this.myContent.menuname;
+    // }
+    this.menuname = this.myContent.menuname;
+
+  },
+
   methods: {
     ProductSubmit: function () {
       const formData = new FormData();
@@ -107,6 +124,19 @@ export default {
         })
 
 
+    },
+    myDataList() {
+      this.id = this.$route.params.menuid;
+      console.log(this.id);
+      axios.get('http://localhost:8282/api/myProduct_detail/' + this.id)
+        .then(res => {
+          console.log(res.data);
+          this.myContent = res.data;
+          console.log(this.myContent.menuname);
+        })
+        .catch(e => {
+          console.log(e);
+        })
     }
   },
   computed: {

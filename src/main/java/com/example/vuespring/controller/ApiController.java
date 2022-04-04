@@ -101,6 +101,15 @@ public class ApiController {
     // 한 행만 출력시 Optional , 전체 행은 List
 
 
+                                    /* 나의상품 상세페이지 */
+    @GetMapping("/myProduct_detail/{menuid}")
+    public Optional<Menu> getMyProduct_Detail(@PathVariable("menuid") int menuid) {
+        System.out.println("메뉴번호 는" + menuid + "입니다.");
+
+        Optional<Menu> myMenuDetailList = menuRepository.findById(menuid);
+        return myMenuDetailList;
+
+    }
 
                                     /* 회원가입 */
     @PostMapping("/signup")
