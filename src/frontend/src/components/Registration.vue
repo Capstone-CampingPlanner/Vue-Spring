@@ -2,7 +2,8 @@
   <div>
     <br>
     <h1>상품 등록 페이지 입니다.</h1>
-    <b-form  v-on:submit.prevent="formSubmit" method="post" enctype="multipart/form-data">
+    <div class="content-detail-content">
+    <b-form v-on:submit.prevent="formSubmit" method="post" enctype="multipart/form-data">
       <label for="text-select">상품분류</label>
       <b-form-select v-model="kindid" :options="options"></b-form-select>
       <div class="mt-3">선택유형 : <strong>{{ kindid }}</strong></div>
@@ -36,14 +37,12 @@
       </b-form-file>
       <div class="mt-3">Selected file: {{ file_load ? file_load.name : '' }}</div>
     </b-form>
+    </div>
 
-    <b-input v-model="this.myContent.menuname" placeholder="제목을 입력해 주세요."></b-input>
-    <p>{{ this.subject }}</p>
-    <p>{{ subject }}</p>
-    <p>{{ this.myContent.menuname }}</p>
     <br>
-    <b-button type="submit" @click="ProductSubmit" pill variant="primary">등록하기</b-button>
-
+    <div class="content-detail-button">
+    <b-button variant="outline-primary" type="submit" @click="ProductSubmit">등록하기</b-button>
+    </div>
   </div>
 </template>
 
@@ -80,16 +79,6 @@ export default {
 
     }
   },
-  created() {
-    this.myDataList()
-
-    // if(this.$route.params.menuid > 0) {
-    //   this.kindid = this.myContent.kindid.kindid;
-    //   this.menuname = this.myContent.menuname;
-    // }
-    this.menuname = this.myContent.menuname;
-
-  },
 
   methods: {
     ProductSubmit: function () {
@@ -125,19 +114,7 @@ export default {
 
 
     },
-    myDataList() {
-      this.id = this.$route.params.menuid;
-      console.log(this.id);
-      axios.get('http://localhost:8282/api/myProduct_detail/' + this.id)
-        .then(res => {
-          console.log(res.data);
-          this.myContent = res.data;
-          console.log(this.myContent.menuname);
-        })
-        .catch(e => {
-          console.log(e);
-        })
-    }
+
   },
   computed: {
 
@@ -146,5 +123,20 @@ export default {
 </script>
 
 <style scoped>
-
+.content-detail-button {
+  border: 1px solid black;
+  margin-top: 1rem;
+  padding: 2rem;
+  size: 200px;
+}
+.button {
+  cursor: pointer;
+  size: 200px;
+}
+.content-detail-content {
+  border: 1px solid black;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  min-height: 650px;
+}
 </style>

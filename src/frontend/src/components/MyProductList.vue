@@ -20,7 +20,7 @@
         <td>{{ myProduct.menuname }}</td>
         <td>{{ myProduct.savedTime }}</td>
       </tr>
-      <router-link :to="{name: 'Registration', params: { menuid:myProduct.menuid }}"></router-link>
+      <router-link :to="{name: 'MyProductDetail', params: { menuid:myProduct.menuid }}"></router-link>
       </tbody>
     </table>
   </div>
@@ -55,7 +55,7 @@ export default {
     },
     showInfo(myProduct) {
       this.$router.push({
-        path: `/Registration/${myProduct.menuid}`
+        path: `/MyProductDetail/${myProduct.menuid}`
       })
     }
 
