@@ -11,7 +11,7 @@
           <b-nav-item to="/userList">회원 정보</b-nav-item>
           <b-nav-item to="/board/free">자유게시판</b-nav-item>
           <b-nav-item to="/registration">상품 등록</b-nav-item>
-          <b-nav-item to="/MyProduct">나의 상품</b-nav-item>
+          <b-nav-item to="/MyProductList">나의 상품</b-nav-item>
           <b-nav-item to="/ProductList" active>상품 리스트</b-nav-item>
         </b-navbar-nav>
       </b-collapse>

@@ -14,8 +14,8 @@ import java.util.Optional;
 @Repository
 public interface MenuRepository extends JpaRepository<Menu, Integer> {
 
-//    Optional<Menu> findByKind(Kind kind);
-
+    Optional<Menu> findByUserid(String userid);
+    List<Menu> findByUserid(Member member);
 //    @Query("select m from Menu m where m.menuname = :menuname")
 //        List<Menu> findAllByMenuList(@Param("menuname") String menuname);
 

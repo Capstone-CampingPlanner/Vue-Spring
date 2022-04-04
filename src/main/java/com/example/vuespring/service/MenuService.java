@@ -1,14 +1,17 @@
 package com.example.vuespring.service;
 
 import com.example.vuespring.constant.ErrorCode;
+import com.example.vuespring.data.Member;
 import com.example.vuespring.data.Menu;
 import com.example.vuespring.dto.ProductDetailDTO;
 import com.example.vuespring.error.GeneralException;
+import com.example.vuespring.repository.MemberRepository;
 import com.example.vuespring.repository.MenuRepository;
 import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -22,6 +25,13 @@ import static com.example.vuespring.constant.Constants.DELETE_N;
 @AllArgsConstructor
 //@RequiredArgsConstructor
 public class MenuService {
+    @Autowired
+    private MemberRepository memberRepository;
+
+    public Member findByMemberId(String userid){
+        Optional<Member> memberfind = memberRepository.findById(userid);
+        return memberfind.get();
+    }
 
     private MenuRepository menuRepository;
 //    private ModelMapper modelMapper;

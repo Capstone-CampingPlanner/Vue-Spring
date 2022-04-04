@@ -48,6 +48,10 @@ public class ApiController {
     @Autowired
     KindRepository kindRepository;
 
+    @Autowired
+    MenuService menuService;
+
+                                    /* 전체유저 리스트 */
     @GetMapping("/user_list")
 //    @JsonProperty("member")
     public List memberList() {
@@ -55,6 +59,7 @@ public class ApiController {
         return members;
     }
 
+                                    /* 전체상품 리스트 */
     @GetMapping("/product_list")
 //    @JsonProperty("menu")
     public List<Menu> menuList() {
@@ -72,17 +77,32 @@ public class ApiController {
 //        return menus;
             return menus;
     }
+                                    /* 판매상품 상세 페이지 */
+    @GetMapping("/product_detail/{menuid}")
+    public Optional<Menu> getProduct_Detail(@PathVariable("menuid") int menuid) {
+        System.out.println("메뉴번호 는" + menuid + "입니다.");
 
-    @GetMapping("/myProduct_list")
+        Optional<Menu> menuDetailList = menuRepository.findById(menuid);
+        return menuDetailList;
+
+    }
+                                    /* 나의상품 리스트 */
+    @GetMapping("/myProduct_list/{userid}")
 //    @JsonProperty("menu")
-    public List<Menu> menuMyList() {
+    public List<Menu> getMenuMyList(@PathVariable("userid") String userid) {
 
 //        System.out.println(menuList.get(0).getKindid().getKindname());
 //        List<Menu> myList = menuRepository.findAllByMenuList("dongmin");
-        List<Menu> myMenus = menuRepository.findAll();
-        return myMenus;
+        System.out.println(userid + " 분 의 상품을 조회하겠습니다.");
+        Member user = menuService.findByMemberId(userid);
+        List<Menu> menuMyList = menuRepository.findByUserid(user);
+        return menuMyList;
     }
+    // 한 행만 출력시 Optional , 전체 행은 List
 
+
+
+                                    /* 회원가입 */
     @PostMapping("/signup")
 //    @JsonProperty("member")
     public Member addMember(@RequestBody Member member) {
@@ -95,6 +115,7 @@ public class ApiController {
         return member;
     }
 
+                                    /* 상품등록 페이지 */
     @PostMapping("/product_signup")
     public Menu addMenu(@RequestParam(value = "file_load", required = false) MultipartFile uploadFile, Menu menu, HttpServletRequest request) throws IllegalStateException, IOException {
         System.out.println("파일 이름" + uploadFile.getOriginalFilename());
@@ -120,26 +141,5 @@ public class ApiController {
         return menu;
     }
 
-    // (api/{code})
-    // pathvariable("code") code)
-
-
-//    @GetMapping("/product_detail/{id}")
-//    @JsonProperty("menu")
-//    public List<Menu> productDetail(@PathVariable("id") Menu userid) {
-//        List<Menu> productListDetail = menuRepository.findByUserid(userid);
-//
-//        return productListDetail;
-//    }
-
-
-    @GetMapping("/product_detail/{menuid}")
-    public Optional<Menu> getProduct_Detail(@PathVariable("menunid") int menuid) throws Exception {
-        System.out.println("성공" + menuid);
-
-        Optional<Menu> menuidList = menuRepository.findById(menuid);
-        return menuidList;
-
-    }
 }
 

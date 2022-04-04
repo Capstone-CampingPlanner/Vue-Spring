@@ -14,12 +14,13 @@
       <tbody>
       <tr v-for="myProduct in list"
           :key="myProduct.id"
-          :item="myProduct" @click="showInfo(myProduct.id)" style="cursor:pointer;">
-        <th scope="row">{{ product.menuid }}</th>
+          :item="myProduct" @click="showInfo(myProduct)" style="cursor:pointer;">
+        <th scope="row">{{ myProduct.menuid }}</th>
         <td>{{ myProduct.kindid.kindname }}</td>
         <td>{{ myProduct.menuname }}</td>
         <td>{{ myProduct.savedTime }}</td>
       </tr>
+      <router-link :to="{name: 'MyProductDetail', params: { menuid:myProduct.menuid }}"></router-link>
       </tbody>
     </table>
   </div>
@@ -29,7 +30,7 @@
 import axios from 'axios'
 
 export default {
-  name: "MyProduct",
+  name: "MyProductList",
   created() {
     this.goMyData()
   },
@@ -42,7 +43,8 @@ export default {
   },
   methods: {
     goMyData() {
-      axios.get('http://localhost:8282/api/myProduct_list')
+      this.user = "dongmin";
+      axios.get('http://localhost:8282/api/myProduct_list/' + this.user)
         .then((res) => {
           console.log(res.data);
           this.list = res.data;
@@ -51,8 +53,10 @@ export default {
           console.log(e)
         })
     },
-    showInfo(id) {
-      this.myProduct = this.list[id]
+    showInfo(myProduct) {
+      this.$router.push({
+        path: `/MyProductDetail/${myProduct.menuid}`
+      })
     }
 
   }

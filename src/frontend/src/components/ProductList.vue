@@ -16,13 +16,14 @@
       <tbody>
       <tr v-for="product in list"
           :key="product.id"
-          :item="product" @click="toDetail(product)">
+          :item="product" @click="toDetail(product)" style="cursor:pointer;">
         <th scope="row">{{ product.menuid }}</th>
         <td>{{ product.menuname }}</td>
         <td>{{ product.kindid.kindname }}</td>
         <td>{{ product.price }}</td>
         <td>{{ product.savedTime }}</td>
       </tr>
+      <!-- PathVariable 을 위해서는 router-link 작성 -->
       <router-link :to="{name: 'productDetail', params: { menuid:product.menuid }}"></router-link>
       </tbody>
     </table>
@@ -55,6 +56,7 @@ export default {
           console.log(e)
         })
     },
+    // path로 받기
     toDetail(product){
       this.$router.push({
         path: `/ProductDetail/${product.menuid}`
